@@ -13,6 +13,7 @@
 <table class="table">
     <tr>
         <th>
+            @*À procura de um helper que mostra o nome do atributo*@
             @Html.DisplayNameFor(model => model.Nome)
         </th>
         <th>
@@ -33,7 +34,13 @@
             @Html.DisplayFor(modelItem => item.Esquadra)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Fotografia)
+            @*Mostrar o conteudo do campo fotografia*@
+            @*@Html.DisplayFor(modelItem => item.Fotografia)*@
+
+            @* Mostrar a imagem do Agente *@
+
+            <img src="~/imagens/@item.Fotografia" height="50"/>
+
         </td>
         <td>
             @Html.ActionLink("Editar", "Edit", new { id=item.ID }) |

@@ -32,7 +32,9 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Fotografia)
+            @*@Html.DisplayFor(model => model.Fotografia)*@
+            @* Mostrar a imagem do Agente *@
+            <img src="~/imagens/@Model.Fotografia" height="150" />
         </dd>
 
     </dl>
