@@ -12,12 +12,18 @@ namespace Multas.Controllers
 {
     public class AgentesController : Controller
     {
+        //Cria uma variavel que representa a DB
         private MultasDB db = new MultasDB();
 
         // GET: Agentes
         public ActionResult Index()
         {
-            return View(db.Agentes.ToList());
+            //procura a totalidade dos Agentes na DB
+            //Instrução feita em LINQ
+            //SELECT * FROM Agentes
+            var listasAgentes = db.Agentes.OrderBy(a=>a.Nome).ToList();
+            
+            return View(listasAgentes);
         }
 
         // GET: Agentes/Details/5
@@ -27,6 +33,7 @@ namespace Multas.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //select * from Agentes where Id=id
             Agentes agentes = db.Agentes.Find(id);
             if (agentes == null)
             {
@@ -46,16 +53,16 @@ namespace Multas.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Nome,Esquadra,Fotografia")] Agentes agentes)
+        public ActionResult Create([Bind(Include = "ID,Nome,Esquadra,Fotografia")] Agentes agente)
         {
             if (ModelState.IsValid)
             {
-                db.Agentes.Add(agentes);
+                db.Agentes.Add(agente);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(agentes);
+            return View(agente);
         }
 
         // GET: Agentes/Edit/5
